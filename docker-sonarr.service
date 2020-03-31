@@ -10,7 +10,7 @@ User=docker
 ExecStart=/usr/bin/docker run --rm \
                               --name=sonarr \
                               -v /home/docker/downloadbox/sonarr/config:/config \
-                              -v /home/docker/downloadbox/sonarr/downloads:/downloads \
+                              -v /home/docker/downloadbox/downloads:/downloads \
                               -v /home/docker/tvseries:/tv \
                               -e PGID=1000 -e PUID=1000  \
                               -e TZ=Europe/Berlin \
