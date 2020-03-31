@@ -22,3 +22,4 @@ used docker containers are,
 * linuxserver/deluge
 
 default password of deluge is "deluge".
+you must set deluge download path as "/downloads/incomplete", then move to "/downloads/complete"
