@@ -1,0 +1,23 @@
+[Unit]
+Description=Radarr docker container
+Requires=docker.service
+After=docker.service
+
+[Service]
+Restart=always
+RestartSec=30
+
+ExecStart=/usr/bin/docker run --rm \
+                              --name=radarr \
+                              -v /home/docker/downloadbox/radarr/config:/config \
+                              -v /home/docker/downloadbox/downloads:/downloads \
+                              -v /home/docker/movies:/movies \
+                              -e PGID=1000 -e PUID=1000  \
+                              -e TZ=Europe/Berlin \
+                              --network host \
+                              linuxserver/radarr
+
+ExecStop=/usr/bin/docker stop radarr
+
+[Install]
+WantedBy=multi-user.target
