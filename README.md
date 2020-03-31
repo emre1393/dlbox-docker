@@ -21,5 +21,8 @@ used docker containers are,
 * linuxserver/jacket  
 * linuxserver/deluge
 
-default password of deluge is "deluge".
+not: restart container procedur is,  
+`systemctl stop docker-$app && systemctl start docker-$app`  
+
+default password of deluge is "deluge".  
 you must set deluge download path as "/downloads/incomplete", then move to "/downloads/complete"
