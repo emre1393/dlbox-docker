@@ -13,4 +13,12 @@
 
 
 i added "how to" stuff to wiki, check this out.  
-https://github.com/emre1393/downloadbox-systemd/wiki
+https://github.com/emre1393/downloadbox-systemd/wiki  
+
+used docker containers are,
+* linuxserver/radarr  
+* linuxserver/sonarr  
+* linuxserver/jacket  
+* linuxserver/deluge
+
+default password of deluge is "deluge".
