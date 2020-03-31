@@ -21,7 +21,7 @@ used docker containers are,
 * linuxserver/jacket  
 * linuxserver/deluge
 
-not: restart container procedur is,  
+not: restart container procedure is,  
 `systemctl stop docker-$app && systemctl start docker-$app`  
 
 default password of deluge is "deluge".  
