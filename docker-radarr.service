@@ -6,7 +6,7 @@ After=docker.service
 [Service]
 Restart=always
 RestartSec=30
-
+User=docker
 ExecStart=/usr/bin/docker run --rm \
                               --name=radarr \
                               -v /home/docker/downloadbox/radarr/config:/config \
