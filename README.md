@@ -1,5 +1,5 @@
 # downloadbox-systemd
-### radarr, sonarr, jackett, deluge containers with systemd  
+### radarr, sonarr, jackett, deluge, bazarr containers with systemd  
 
 * i am a newbie with docker.  
 
@@ -20,6 +20,7 @@ used docker containers are,
 * linuxserver/sonarr  
 * linuxserver/jacket  
 * linuxserver/deluge
+* linuxserver/bazarr  
 
 not: restart container procedure is,  
 `systemctl stop docker-$app && systemctl start docker-$app`  
