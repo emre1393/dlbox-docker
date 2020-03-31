@@ -12,5 +12,5 @@
 (please correct me if i did something wrong)  
 
 
-i added "how to" stuff to wiki, check this out.
+i added "how to" stuff to wiki, check this out.  
 https://github.com/emre1393/downloadbox-systemd/wiki
