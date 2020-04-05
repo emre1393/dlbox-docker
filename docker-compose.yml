@@ -1,0 +1,84 @@
+version: '3.4'
+services:
+
+  deluge:   #deluge default password is "deluge" and web link is "ip_address:8112".
+    container_name: deluge
+    image: linuxserver/deluge
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      - PUID=${PUID} # default user id, defined in .env 
+      - PGID=${PGID} # default group id, defined in .env
+      - TZ=${TZ} # timezone, defined in .env
+    volumes:
+      - ${ROOT}/downloads:/downloads # downloads folder
+      - ${ROOT}/config/deluge:/config # config files
+
+  jackett: #jackett default web link is "ip_address:9117".
+    container_name: jackett
+    image: linuxserver/jackett
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      - PUID=${PUID} # default user id, defined in .env
+      - PGID=${PGID} # default group id, defined in .env
+      - TZ=${TZ} # timezone, defined in .env
+    volumes:
+      - ${ROOT}/downloads/torrent-blackhole:/downloads # place where to put .torrent files for manual download
+      - ${ROOT}/config/jackett:/config # config files
+
+  sonarr: #sonarr default web link is "ip_address:8989".
+    container_name: sonarr
+    image: linuxserver/sonarr
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      - PUID=${PUID} # default user id, defined in .env
+      - PGID=${PGID} # default group id, defined in .env
+      - TZ=${TZ} # timezone, defined in .env
+    volumes:
+      - ${ROOT}/config/sonarr:/config # config files
+      - ${ROOT}/media/tv:/tv # tv shows folder
+      - ${ROOT}/downloads:/downloads # download folder
+
+  radarr: #radarr default web link is "ip_address:7878".
+    container_name: radarr
+    image: linuxserver/radarr
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      - PUID=${PUID} # default user id, defined in .env
+      - PGID=${PGID} # default group id, defined in .env
+      - TZ=${TZ} # timezone, defined in .env
+    volumes:
+      - ${ROOT}/config/radarr:/config # config files
+      - ${ROOT}/media/movies:/movies # movies folder
+      - ${ROOT}/downloads:/downloads # download folder
+
+  plex-server: #plex default web link is "ip_address:32400/web".
+    container_name: plex-server
+    image: plexinc/pms-docker
+    restart: unless-stopped
+    environment:
+        - PUID=${PUID} # default user id, defined in .env
+        - PGID=${PGID} # default group id, defined in .env
+        - TZ=${TZ} # timezone, defined in .env
+    network_mode: host
+    volumes:
+      - ${ROOT}/config/plex/db:/config # plex database
+      - ${ROOT}/config/plex/transcode:/transcode # temp transcoded files
+      - ${ROOT}/media:/data # media library
+
+  bazarr: #bazarr default web link is "ip_address:6767".
+    container_name: bazarr
+    image: linuxserver/bazarr
+    restart: unless-stopped
+    environment:
+        - PUID=${PUID} # default user id, defined in .env
+        - PGID=${PGID} # default group id, defined in .env
+        - TZ=${TZ}
+    network_mode: host
+    volumes: 
+        - ${ROOT}/config/bazarr/config:/config # config files
+        - ${ROOT}/media/movies:/movies # movies folder
+        - ${ROOT}/media/tv:/tv # tv shows folder
