@@ -27,3 +27,5 @@ not: restart container procedure is,
 
 default password of deluge is "deluge".  
 you must set deluge download path as "/downloads/incomplete", then move to "/downloads/complete"
+
+edit: i have added docker-compose.yml
