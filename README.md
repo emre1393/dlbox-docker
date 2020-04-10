@@ -1,13 +1,9 @@
-# downloadbox-systemd
-### radarr, sonarr, jackett, deluge, bazarr containers with systemd  
+# downloadbox-docker
+### radarr, sonarr, jackett, deluge, bazarr, plex containers with docker-compose   
 
 * i am a newbie with docker.  
 
-* i prepared 5 systemd file with help from radarr's github docker guide.  
-
-* i will add a user named "docker" with no-login and uid=1000, gid=1000.  
-* i will create some folders for these containers.  
-* i will set up an nginx reverse proxy with https.  
+* i forked docker-compose.yml from some github repo, i don't remember now, sorry.
 
 (please correct me if i did something wrong)  
 
@@ -21,9 +17,7 @@ used docker containers are,
 * linuxserver/jacket  
 * linuxserver/deluge
 * linuxserver/bazarr  
-
-not: restart container procedure is,  
-`systemctl stop docker-$app && systemctl start docker-$app`  
+* plexinc/pms-docker
 
 default password of deluge is "deluge".  
 you must set deluge download path as "/downloads/incomplete", then move to "/downloads/complete"
