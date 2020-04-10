@@ -9,7 +9,7 @@
 
 
 i added "how to" stuff to wiki, check this out.  
-https://github.com/emre1393/downloadbox-systemd/wiki  
+https://github.com/emre1393/dlbox-docker/wiki
 
 used docker containers are,
 * linuxserver/radarr  
