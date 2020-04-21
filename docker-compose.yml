@@ -3,7 +3,7 @@ services:
 
   deluge:   #deluge default password is "deluge" and web link is "ip_address:8112".
     container_name: deluge
-    image: linuxserver/deluge
+    image: linuxserver/deluge:5b398f77-ls22
     restart: unless-stopped
     network_mode: host
     environment:
