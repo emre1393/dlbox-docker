@@ -63,11 +63,13 @@ services:
         - PUID=${PUID} # default user id, defined in .env
         - PGID=${PGID} # default group id, defined in .env
         - TZ=${TZ} # timezone, defined in .env
+        - PLEX_CLAIM=${CLAIM_CODE} #plex claim code
     network_mode: host
     volumes:
-      - ${ROOT}/config/plex/db:/config # plex database
+      - ${ROOT}/config/plex/config:/config # plex database
       - ${ROOT}/config/plex/transcode:/transcode # temp transcoded files
-      - ${ROOT}/media:/data # media library
+      - ${ROOT}/media/movies:/data/movies # movies folder
+      - ${ROOT}/media/tv:/data/tvshows # tv shows folder
 
   bazarr: #bazarr default web link is "ip_address:6767".
     container_name: bazarr
