@@ -57,11 +57,11 @@ services:
 
   plex-server: #plex default web link is "ip_address:32400/web".
     container_name: plex-server
-    image: linuxserver/plex
+    image: plexinc/pms-docker
     restart: unless-stopped
     environment:
-        - PUID=${PUID} # default user id, defined in .env
-        - PGID=${PGID} # default group id, defined in .env
+        - PLEX_UID=${PUID} # default user id, defined in .env
+        - PLEX_GID=${PGID} # default group id, defined in .env
         - VERSION=docker # Set whether to update plex or not - see Application Setup section.
         - TZ=${TZ} # timezone, defined in .env
         - PLEX_CLAIM=${CLAIM_CODE} #plex claim code

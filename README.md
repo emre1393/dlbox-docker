@@ -17,7 +17,7 @@ used docker containers are,
 * linuxserver/jacket  
 * linuxserver/deluge
 * linuxserver/bazarr  
-* linuxserver/plex  
+* plexinc/pms-docker 
 
 default password of deluge is "deluge".  
 you must set deluge download path as "/downloads/incomplete", then move to "/downloads/complete"
