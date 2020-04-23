@@ -19,7 +19,13 @@ used docker containers are,
 * linuxserver/bazarr  
 * plexinc/pms-docker 
 
+
+edit: i have added docker-compose.yml
+
+
 default password of deluge is "deluge".  
 you must set deluge download path as "/downloads/incomplete", then move to "/downloads/complete"
 
-edit: i have added docker-compose.yml
+
+jacket api link is,
+https://domain.com/jackett/api/v2.0/indexers/all/results/torznab
