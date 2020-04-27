@@ -5,7 +5,8 @@ services:
     container_name: deluge
     image: linuxserver/deluge:5b398f77-ls22
     restart: unless-stopped
-    network_mode: host
+    ports:
+      - 5111:8112
     environment:
       - PUID=${PUID} # default user id, defined in .env 
       - PGID=${PGID} # default group id, defined in .env
@@ -18,7 +19,8 @@ services:
     container_name: jackett
     image: linuxserver/jackett
     restart: unless-stopped
-    network_mode: host
+    ports:
+      - 5112:9117
     environment:
       - PUID=${PUID} # default user id, defined in .env
       - PGID=${PGID} # default group id, defined in .env
@@ -31,7 +33,8 @@ services:
     container_name: sonarr
     image: linuxserver/sonarr
     restart: unless-stopped
-    network_mode: host
+    ports:
+      - 5113:8989
     environment:
       - PUID=${PUID} # default user id, defined in .env
       - PGID=${PGID} # default group id, defined in .env
@@ -45,7 +48,8 @@ services:
     container_name: radarr
     image: linuxserver/radarr
     restart: unless-stopped
-    network_mode: host
+    ports:
+      - 5114:7878
     environment:
       - PUID=${PUID} # default user id, defined in .env
       - PGID=${PGID} # default group id, defined in .env
@@ -65,8 +69,9 @@ services:
         - VERSION=docker # Set whether to update plex or not - see Application Setup section.
         - TZ=${TZ} # timezone, defined in .env
         - PLEX_CLAIM=${CLAIM_CODE} #plex claim code
-    network_mode: host
-    volumes:
+        ports:
+          - 5115:32400
+        volumes:
       - ${ROOT}/config/plex/config:/config # plex database
       - ${ROOT}/media/movies:/movies # movies folder
       - ${ROOT}/media/tv:/tv # tv shows folder
@@ -79,8 +84,9 @@ services:
         - PUID=${PUID} # default user id, defined in .env
         - PGID=${PGID} # default group id, defined in .env
         - TZ=${TZ}
-    network_mode: host
-    volumes: 
+        ports:
+          - 5116:6767
+        volumes: 
         - ${ROOT}/config/bazarr/config:/config # config files
         - ${ROOT}/media/movies:/movies # movies folder
         - ${ROOT}/media/tv:/tv # tv shows folder

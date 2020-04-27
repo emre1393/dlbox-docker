@@ -3,13 +3,13 @@
 
 * i am a newbie with docker.  
 
-* i forked docker-compose.yml from some github repo, i don't remember now, sorry.
+* i forked docker-compose.yml from some github repo, i don't remember now, sorry.  
 
 (please correct me if i did something wrong)  
 
 
 
-used docker containers are,
+used docker containers are,  
 * linuxserver/radarr  
 * linuxserver/sonarr  
 * linuxserver/jacket  
@@ -18,12 +18,15 @@ used docker containers are,
 * plexinc/pms-docker 
 
 
-edit: i have added docker-compose.yml
+edit: i have added docker-compose.yml  
 
 
 default password of deluge is "deluge".  
-you must set deluge download path as "/downloads/incomplete", then move to "/downloads/complete"
+you must set deluge download path as "/downloads/incomplete", then move to "/downloads/complete"  
 
+add deluge to sonarr/radarr with container hostnames and original port. 
+host: "deluge" and port: "8112"  
 
-jacket api link is,
-https://domain.com/jackett/api/v2.0/indexers/all/results/torznab
+jacket api link is,  
+http://jackett:9117/api/v2.0/indexers/all/results/torznab/  
+
