@@ -23,6 +23,7 @@ edit: i have added docker-compose.yml
 
 default password of deluge is "deluge".  
 you must set deluge download path as "/downloads/incomplete", then move to "/downloads/complete"  
+(don't forget to create those folders)
 
 add deluge to sonarr/radarr with container hostnames and original port. 
 host: "deluge" and port: "8112"  
