@@ -12,7 +12,8 @@ services:
       - PGID=${PGID} # default group id, defined in .env
       - TZ=${TZ} # timezone, defined in .env
     volumes:
-      - ${ROOT}/downloads:/downloads # downloads folder
+      - ${ROOT}/downloads/complete:/downloads/complete # complete downloads folder
+      - ${ROOT}/downloads/incomplete:/downloads/incomplete # incomplete downloads folder
       - ${ROOT}/config/deluge:/config # config files
 
   jackett: #jackett default web link is "ip_address:9117".
@@ -41,8 +42,9 @@ services:
       - TZ=${TZ} # timezone, defined in .env
     volumes:
       - ${ROOT}/config/sonarr:/config # config files
-      - ${ROOT}/media/tv:/tv # tv shows folder
-      - ${ROOT}/downloads:/downloads # download folder
+      - ${ROOT}/media/tvshows:/tvshows # tv shows folder
+      - ${ROOT}/downloads/complete:/downloads/complete # complete downloads folder
+      - ${ROOT}/downloads/recycle:/downloads/recycle # recycle folder
 
   radarr: #radarr default web link is "ip_address:7878".
     container_name: radarr
@@ -57,7 +59,8 @@ services:
     volumes:
       - ${ROOT}/config/radarr:/config # config files
       - ${ROOT}/media/movies:/movies # movies folder
-      - ${ROOT}/downloads:/downloads # download folder
+      - ${ROOT}/downloads/complete:/downloads/complete # complete downloads folder
+      - ${ROOT}/downloads/recycle:/downloads/recycle # recycle folder
 
   plex-server: #plex default web link is "ip_address:32400/web".
     container_name: plex-server
@@ -74,7 +77,7 @@ services:
     volumes:
       - ${ROOT}/config/plex/config:/config # plex database
       - ${ROOT}/media/movies:/movies # movies folder
-      - ${ROOT}/media/tv:/tv # tv shows folder
+      - ${ROOT}/media/tvshows:/tvshows # tv shows folder
 
   bazarr: #bazarr default web link is "ip_address:6767".
     container_name: bazarr
@@ -89,4 +92,4 @@ services:
     volumes: 
         - ${ROOT}/config/bazarr/config:/config # config files
         - ${ROOT}/media/movies:/movies # movies folder
-        - ${ROOT}/media/tv:/tv # tv shows folder
+        - ${ROOT}/media/tvshows:/tvshows # tv shows folder
