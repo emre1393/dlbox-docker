@@ -116,6 +116,6 @@ services:
           - 443:443
     volumes: 
         - /etc/letsencrypt:/etc/letsencrypt # certbot folder
-        - ${ROOT}/nginx/config/nginx.conf:/etc/nginx/nginx.conf # nginx config
-        - ${ROOT}/nginx/config/dhparam.pem:/etc/nginx/dhparam.pem # nginx dhparam
-        - ${ROOT}/nginx/_letsencrypt:/var/www/_letsencrypt # certbot challange folder
+        - ${ROOT}/nginx/nginx.conf:/etc/nginx/nginx.conf # nginx config
+        - ${ROOT}/nginx/dhparam.pem:/etc/nginx/dhparam.pem # nginx dhparam
+        - ${ROOT}/nginx/_letsencrypt:/etc/nginx/_letsencrypt # certbot challange folder
