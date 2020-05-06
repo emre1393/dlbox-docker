@@ -120,6 +120,6 @@ services:
         - /etc/letsencrypt:/etc/letsencrypt # certbot folder
         - ${ROOT}/nginx/nginx.conf:/etc/nginx/nginx.conf # nginx config, create nginx folder and copy nginx.conf and dhpara.pem before running docker compose.
         - ${ROOT}/nginx/dhparam.pem:/etc/nginx/dhparam.pem # nginx dhparam
-        - ${ROOT}/nginx/certbot:/etc/nginx/certbot # certbot challange folder
+        - /var/www/_letsencrypt:/var/www/_letsencrypt # certbot challange folder
         - ${ROOT}/nginx/auth:/etc/nginx/auth # nginx auth .htpasswd folder, you can find how to create .htpasswd in nginx.conf file.
   
