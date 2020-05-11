@@ -101,17 +101,32 @@ services:
       - PGID=${PGID} # default group id, defined in .env
       - TZ=${TZ}    
     volumes: 
-        - ${ROOT}/config/bazarr/config:/config # config files
-        - ${ROOT}/media/movies:/movies # movies folder
-        - ${ROOT}/media/tvshows:/tvshows # tv shows folder
+      - ${ROOT}/config/bazarr/config:/config # config files
+      - ${ROOT}/media/movies:/movies # movies folder
+      - ${ROOT}/media/tvshows:/tvshows # tv shows folder
+
+  nzbget:
+    container_name: nzbget
+    image: linuxserver/nzbget
+    restart: unless-stopped
+    environment:
+      - PUID=${PUID} # default user id, defined in .env
+      - PGID=${PGID} # default group id, defined in .env
+      - TZ=${TZ}    
+    volumes:
+      - ${ROOT}/downloads/complete:/downloads/complete # complete downloads folder
+      - ${ROOT}/downloads/incomplete:/downloads/incomplete # incomplete downloads folder
+      - ${ROOT}/config/nzbget/config:/config # config files
+      ports:
+      - "127.0.0.1:6789:6789"
       
   nginx: #nginx reverse proxy.
     container_name: nginx
     image: nginx:stable
     restart: unless-stopped
     ports:
-          - 80:80
-          - 443:443
+        - 80:80
+        - 443:443
     environment:
         - PUID=${PUID} # default user id, defined in .env
         - PGID=${PGID} # default group id, defined in .env
