@@ -35,7 +35,7 @@ docker-compose pull
 
 
 default password of deluge is "deluge".  
-you must set deluge download path as "/downloads/incomplete", then move to "/downloads/complete"  
+you must set deluge download path as "/downloads/incompleted", then move to "/downloads/completed"  
 (don't forget to create those folders)
 
 add deluge to sonarr/radarr with container hostnames and original port. 

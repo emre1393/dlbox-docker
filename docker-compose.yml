@@ -12,8 +12,8 @@ services:
       - PGID=${PGID} # default group id, defined in .env
       - TZ=${TZ} # timezone, defined in .env
     volumes:
-      - ${ROOT}/downloads/complete:/downloads/complete # complete downloads folder
-      - ${ROOT}/downloads/incomplete:/downloads/incomplete # incomplete downloads folder
+      - ${ROOT}/downloads/completed:/downloads/completed # complete downloads folder
+      - ${ROOT}/downloads/incompleted:/downloads/incompleted # incomplete downloads folder
       - ${ROOT}/config/deluge:/config # config files
 
   
@@ -45,7 +45,7 @@ services:
     volumes:
       - ${ROOT}/config/sonarr:/config # config files
       - ${ROOT}/media/tvshows:/tvshows # tv shows folder
-      - ${ROOT}/downloads/complete:/downloads/complete # complete downloads folder
+      - ${ROOT}/downloads/completed:/downloads/completed # complete downloads folder
       - ${ROOT}/downloads/recycle:/downloads/recycle # recycle folder
   
   radarr: #radarr default web link is "ip_address:7878".
@@ -61,7 +61,7 @@ services:
     volumes:
       - ${ROOT}/config/radarr:/config # config files
       - ${ROOT}/media/movies:/movies # movies folder
-      - ${ROOT}/downloads/complete:/downloads/complete # complete downloads folder
+      - ${ROOT}/downloads/completed:/downloads/completed # complete downloads folder
       - ${ROOT}/downloads/recycle:/downloads/recycle # recycle folder
       
   plex-server: #plex default web link is "ip_address:32400/web".
