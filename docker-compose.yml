@@ -117,7 +117,7 @@ services:
       - ${ROOT}/downloads/complete:/downloads/complete # complete downloads folder
       - ${ROOT}/downloads/incomplete:/downloads/incomplete # incomplete downloads folder
       - ${ROOT}/config/nzbget/config:/config # config files
-      ports:
+    ports:
       - "127.0.0.1:6789:6789"
       
   nginx: #nginx reverse proxy.
