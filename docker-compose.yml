@@ -95,7 +95,7 @@ services:
     image: linuxserver/bazarr
     restart: unless-stopped
     ports:
-          - "127.0.0.1:6767:6767"
+      - "127.0.0.1:6767:6767"
     environment:
       - PUID=${PUID} # default user id, defined in .env
       - PGID=${PGID} # default group id, defined in .env
@@ -114,8 +114,7 @@ services:
       - PGID=${PGID} # default group id, defined in .env
       - TZ=${TZ}    
     volumes:
-      - ${ROOT}/downloads/complete:/downloads/complete # complete downloads folder
-      - ${ROOT}/downloads/incomplete:/downloads/incomplete # incomplete downloads folder
+      - ${ROOT}/downloads:/downloads # complete downloads folder
       - ${ROOT}/config/nzbget/config:/config # config files
     ports:
       - "127.0.0.1:6789:6789"
