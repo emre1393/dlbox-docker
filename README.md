@@ -21,6 +21,18 @@ used docker containers are,
 
 edit: i have added docker-compose.yml  
 
+-to start docker-compose  
+docker-compose up -d  
+
+-to stop containers  
+docker-compose stop  
+
+-to remove containers  
+docker-compose down  
+
+-to update images (remove containers, update images and start docker-compose again)  
+docker-compose pull  
+
 
 default password of deluge is "deluge".  
 you must set deluge download path as "/downloads/incomplete", then move to "/downloads/complete"  
