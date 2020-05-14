@@ -75,7 +75,7 @@ services:
         - TZ=${TZ} # timezone, defined in .env
         - PLEX_CLAIM=${CLAIM_CODE} #plex claim code
     ports:
-      - "127.0.0.1:32400:32400"
+      - 32400:32400
       - "3005:3005/tcp"
       - "8324:8324/tcp"
       - "32469:32469/tcp"
