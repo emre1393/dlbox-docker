@@ -132,6 +132,8 @@ services:
         - TZ=${TZ}
     volumes: 
         - /etc/letsencrypt:/etc/letsencrypt # certbot folder
+        - /var/www/html/dlbox:/var/www/html/dlbox # root folder of website
+        - /var/www/html/acme:/var/www/html/acme # certbot challange folder
         - ${ROOT}/nginx/nginx.conf:/etc/nginx/nginx.conf # nginx config, create nginx folder and copy nginx.conf and dhpara.pem before running docker compose.
         - ${ROOT}/nginx/dhparam.pem:/etc/nginx/dhparam.pem # nginx dhparam
         - ${ROOT}/nginx/auth:/etc/nginx/auth # nginx auth .htpasswd folder, you can find how to create .htpasswd in nginx.conf file.

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<style>
+* {box-sizing: border-box}
+
+/* Set height of body and the document to 100% */
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: Arial;
+}
+
+/* Style tab links */
+.tablink {
+  background-color: #555;
+  color: white;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  font-size: 17px;
+  width: 14%;
+}
+
+.tablink:hover {
+  background-color: #777;
+}
+
+/* Style the tab content (and add height:100% for full page content) */
+.tabcontent {
+  color: white;
+  display: none;
+  padding: 100px 20px;
+  width: 100%;
+  height: 100%;
+}
+
+#Home {background-color: red;}
+#News {background-color: green;}
+#Contact {background-color: blue;}
+#About {background-color: orange;}
+</style>
+</head>
+<body>
+
+<button class="tablink" onclick="openPage('radarr', this, 'green')" id="defaultOpen">Radarr</button>
+<button class="tablink" onclick="openPage('sonarr', this, 'green')">Sonarr</button>
+<button class="tablink" onclick="openPage('plex', this, 'green')">Plex-web</button>
+<button class="tablink" onclick="openPage('deluge', this, 'green')">Deluge</button>
+<button class="tablink" onclick="openPage('nzbget', this, 'green')">Nzbget</button>
+<button class="tablink" onclick="openPage('jackett', this, 'green')">Jackett</button>
+<button class="tablink" onclick="openPage('bazarr', this, 'green')">Bazarr</button>
+
+
+<div id="radarr" class="tabcontent">
+<iframe style="border:none" src="./radarr" allowfullscreen onload="document.title=parent.frames['cframe'].document.title;"></iframe>
+</div>
+
+<div id="sonarr" class="tabcontent">
+<iframe style="border:none" src="./sonarr" allowfullscreen onload="document.title=parent.frames['cframe'].document.title;"></iframe>
+</div>
+
+<div id="deluge" class="tabcontent">
+<iframe style="border:none" src="./deluge" allowfullscreen onload="document.title=parent.frames['cframe'].document.title;"></iframe>
+</div>
+
+<div id="plex" class="tabcontent">
+<iframe style="border:none" src="./web" allowfullscreen onload="document.title=parent.frames['cframe'].document.title;"></iframe>
+</div>
+
+<div id="nzbget" class="tabcontent">
+<iframe style="border:none" src="./nzbget" allowfullscreen onload="document.title=parent.frames['cframe'].document.title;"></iframe>
+</div>
+
+<div id="jackett" class="tabcontent">
+<iframe style="border:none" src="./jackett" allowfullscreen onload="document.title=parent.frames['cframe'].document.title;"></iframe>
+</div>
+
+<div id="bazarr" class="tabcontent">
+<iframe style="border:none" src="./bazarr" allowfullscreen onload="document.title=parent.frames['cframe'].document.title;"></iframe>
+</div>
+
+
+<script>
+function openPage(pageName,elmnt,color) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].style.backgroundColor = "";
+  }
+  document.getElementById(pageName).style.display = "block";
+  elmnt.style.backgroundColor = color;
+}
+
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+</script>
+   
+</body>
+</html> 
