@@ -1,20 +1,38 @@
-version: '3.4'
+version: '3'
 services:
 
-  deluge:   #deluge default password is "deluge" and web link is "ip_address:8112".
-    container_name: deluge
-    image: linuxserver/deluge:5b398f77-ls22
-    restart: unless-stopped
+# go to https://ipleak.net/ and add magnet link to transmission, it will show the ip address of transmission. a good trick to check if vpn is leaking your ip.
+  transmission:
+    container_name: transmission-vpn
+    image: haugene/transmission-openvpn
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun
+    restart: always
     ports:
-      - "127.0.0.1:8112:8112"
+      - "127.0.0.1:9091:9091"
+      - "127.0.0.1:8888:8888"
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
     environment:
-      - PUID=${PUID} # default user id, defined in .env 
+      - OPENVPN_PROVIDER=${VPN_PROVIDER}
+      - OPENVPN_USERNAME=${VPN_USERNAME}
+      - OPENVPN_PASSWORD=${VPN_PASSWORD}
+      - OPENVPN_OPTS=--inactive 3600 --ping 10 --ping-exit 60
+      - LOCAL_NETWORK=192.168.0.0/24
+      - TRANSMISSION_RATIO_LIMIT_ENABLED=1
+      - TRANSMISSION_RATIO_LIMIT=0
+      - TRANSMISSION_DOWNLOAD_DIR=/downloads/completed # complete downloads folder
+      - TRANSMISSION_INCOMPLETE_DIR=/downloads/incompleted # incomplete downloads folder
+      - PUID=${PUID} # default user id, defined in .env
       - PGID=${PGID} # default group id, defined in .env
-      - TZ=${TZ} # timezone, defined in .env
     volumes:
-      - ${ROOT}/downloads/completed:/downloads/completed # complete downloads folder
+      - /etc/localtime:/etc/localtime:ro
+      - ${ROOT}/config/transmission:/data
+      - ${ROOT}/downloads/completed:/downloads/completed # complete downloads folder, btw, you need to change these folders in transmission setting.json file
       - ${ROOT}/downloads/incompleted:/downloads/incompleted # incomplete downloads folder
-      - ${ROOT}/config/deluge:/config # config files
 
   
   jackett: #jackett default web link is "ip_address:9117".
@@ -47,7 +65,7 @@ services:
       - ${ROOT}/media/tvshows:/tvshows # tv shows folder
       - ${ROOT}/downloads/completed:/downloads/completed # complete downloads folder
       - ${ROOT}/downloads/recycle:/downloads/recycle # recycle folder
-  
+
   radarr: #radarr default web link is "ip_address:7878".
     container_name: radarr
     image: linuxserver/radarr
