@@ -63,7 +63,21 @@ services:
       - ${ROOT}/media/movies:/movies # movies folder
       - ${ROOT}/downloads/completed:/downloads/completed # complete downloads folder
       - ${ROOT}/downloads/recycle:/downloads/recycle # recycle folder
-      
+
+  ombi:
+    container_name: ombi
+    image: linuxserver/ombi
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:3579:3579"
+    environment:
+      - PUID=${PUID} # default user id, defined in .env
+      - PGID=${PGID} # default group id, defined in .env
+      - TZ=${TZ} # timezone, defined in .env
+      - BASE_URL=/ombi #optional
+    volumes:
+      - ${ROOT}/config/ombi:/config # config files
+         
   plex-server: #plex default web link is "ip_address:32400/web".
     container_name: plex-server
     image: plexinc/pms-docker
