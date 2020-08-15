@@ -107,7 +107,7 @@ function mergethesrt {
         removebakfile
     elif [[ $moviefullpath == *.mkv ]]; then 
         renamethemovie
-        mmkvwithsrt
+        mkvwithsrt
         removebakfile
     else
         echo "$moviefullpath is not an mp4 or an mkv"
