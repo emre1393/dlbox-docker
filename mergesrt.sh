@@ -53,7 +53,7 @@ function renamethemovie {
         if [[ ! -f "$moviein" ]]; then
         /bin/cp "$moviefullpath" "$moviein";
         fi
-        infileduration=$(/usr/bin/ffprobe -v error -select_streams v:0 -show_entries stream=duration -of default=noprint_wrappers=1:nokey=1 "$moviein")
+        infileduration=$(/usr/bin/ffprobe -v error -select_streams v:0 -show_entries stream=duration -of default=noprint_wrappers=1:nokey=1 "$moviein" | awk -F\. '{print $1}')
         subtitle_count=$(/usr/bin/ffprobe -v error -show_entries stream=codec_type "$moviein" | grep "codec_type=subtitle" | wc -w)
         #echo "$subtitle_count"
     else
@@ -66,7 +66,7 @@ function renamethemovie {
 function mp4withsrt {
     if [[ -f "$moviein" ]]; then
         /usr/bin/ffmpeg -y -nostdin -loglevel error -i "$moviein" -f srt -i "$srt_file" -map 0 -c copy -c:s mov_text -map_metadata 0 -map 1 -c:s:$subtitle_count mov_text -metadata:s:s:$subtitle_count language="$lang_code" "$movieout";
-        outfileduration=$(/usr/bin/ffprobe -v error -select_streams v:0 -show_entries stream=duration -of default=noprint_wrappers=1:nokey=1 "$movieout")
+        outfileduration=$(/usr/bin/ffprobe -v error -select_streams v:0 -show_entries stream=duration -of default=noprint_wrappers=1:nokey=1 "$movieout" | awk -F\. '{print $1}')
     else
         echo ""$moviein" does not exit -mp4 with srt function"
         exit;
@@ -77,7 +77,7 @@ function mp4withsrt {
 function mkvwithsrt {
     if [[ -f "$moviein" ]]; then
         /usr/bin/ffmpeg -y -nostdin -loglevel error -i "$moviein" -f srt -i "$srt_file" -map 0 -c copy -c:s srt -map_metadata 0 -map 1 -c:s:$subtitle_count srt -metadata:s:s:$subtitle_count language="$lang_code" "$movieout";
-        outfileduration=$(/usr/bin/ffprobe -v error -select_streams v:0 -show_entries stream=duration -of default=noprint_wrappers=1:nokey=1 "$movieout")
+        outfileduration=$(/usr/bin/ffprobe -v error -select_streams v:0 -show_entries stream=duration -of default=noprint_wrappers=1:nokey=1 "$movieout" | awk -F\. '{print $1}')
     else
         echo ""$moviein" does not exit -mkv with srt function"
         exit;
@@ -95,7 +95,7 @@ function removebakfile {
 	    else
             /bin/rm "$moviein";
             /bin/rm "$movieout";
-            echo ""$movieout" does not match with "$moviein" -remove bak file function"
+            echo ""$movieout" ("$outfileduration") does not match with "$moviein"  ("$infileduration") -remove bak file function"
             exit;
         fi
     else
