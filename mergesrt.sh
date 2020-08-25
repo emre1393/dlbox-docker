@@ -94,6 +94,7 @@ function removebakfile {
         fi
     else
         /bin/rm "$moviein";
+        /bin/rm "$movieout";
         echo ""$movieout" does not exit -remove bak file function"
         exit;
     fi
