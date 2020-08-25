@@ -6,7 +6,7 @@
 #then add post processing command to bazarr
 # /config/mergesrt.sh "{{directory}}" "{{episode}}" "{{episode_name}}" "{{subtitles_language_code3}}" "{{subtitles}}" 2>&1
 
-[ $# -lt 5 ] && echo "Usage: mergesrt.sh \"{{directory}}\" \"{{episode}}\" \"{{episode_name}}\" \"{{subtitles_language_code3}}\" \"{{subtitles}}\"" && exit 1
+[ $# -lt 5 ] && echo "Usage: mergesrt.sh \"{{directory}}\" \"{{episode}}\" \"{{episode_name}}\" \"{{subtitles_language_code3}}\" \"{{subtitles}}\" 2>&1" && exit 1
 
 directory=$1  # /path/of/movie/
 moviefullpath=$2  # /path/of/movie/moviefile.mp4
