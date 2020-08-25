@@ -91,10 +91,15 @@ function removebakfile {
             /bin/cp "$movieout" "$moviefullpath";
             /bin/rm "$moviein";
             /bin/rm "$movieout";
+		    echo "succes!! "$movieout" must be copied to original location. -remove bak file function"
+	    else
+            /bin/rm "$moviein";
+            /bin/rm "$movieout";
+            echo ""$movieout" does not match with "$moviein" -remove bak file function"
+            exit;
         fi
     else
         /bin/rm "$moviein";
-        /bin/rm "$movieout";
         echo ""$movieout" does not exit -remove bak file function"
         exit;
     fi
