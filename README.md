@@ -47,3 +47,6 @@ http://jackett:9117/api/v2.0/indexers/all/results/torznab/
 
 Nzbget Webui can be found at your-ip:6789 and the default login details (change ASAP) are  
 login:nzbget, password:tegbzn6789  
+
+
+wget -qO- https://get.docker.com/ | sh > /dev/null
