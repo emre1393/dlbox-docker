@@ -9,10 +9,10 @@
 [ $# -lt 4 ] && echo "Usage: bazarr_srt.sh  \"{{episode}}\" \"{{episode_name}}\" \"{{subtitles_language_code3}}\" \"{{subtitles}}\" 2>&1" && exit 1
 
 #directory=$1  # /path/of/movie/
-moviefullpath=$2  # /path/of/movie/moviefile.mp4
-filename=$3    # moviefile
-lang_code=$4   # eng
-srt_file=$5    # /path/of/movie/moviefile.en.srt
+moviefullpath=$1  # /path/of/movie/moviefile.mp4
+filename=$2    # moviefile
+lang_code=$3   # eng
+srt_file=$4    # /path/of/movie/moviefile.en.srt
 #my movie disk was on smb share, i had to copy the file in to a backup folder to process it with ffmpeg, you can use directory variable if you are using local storage.
 backupfolder="/home/bazarr_temp"
 
@@ -59,7 +59,7 @@ function renamethemovie {
         if [[ ! -f "$moviein" ]]; then
         /bin/cp "$moviefullpath" "$moviein";
         fi
-        infileduration=$(/usr/bin/ffprobe -v error -select_streams v:0 -show_entries stream=duration -of default=noprint_wrappers=1:nokey=1 "$moviein" | awk -F\. '{print $1}')
+        #infileduration=$(/usr/bin/ffprobe -v error -select_streams v:0 -show_entries stream=duration -of default=noprint_wrappers=1:nokey=1 "$moviein" | awk -F\. '{print $1}')
         subtitle_count=$(/usr/bin/ffprobe -v error -show_entries stream=codec_type "$moviein" | grep "codec_type=subtitle" | wc -w)
         #echo "$subtitle_count"
     else
@@ -72,7 +72,7 @@ function renamethemovie {
 function mp4withsrt {
     if [[ -f "$moviein" ]]; then
         /usr/bin/ffmpeg -y -nostdin -loglevel error -i "$moviein" -f srt -i "$srt_file" -map 0 -c copy -c:s mov_text -map_metadata 0 -map 1 -c:s:$subtitle_count mov_text -metadata:s:s:$subtitle_count language="$lang_code" "$movieout";
-        outfileduration=$(/usr/bin/ffprobe -v error -select_streams v:0 -show_entries stream=duration -of default=noprint_wrappers=1:nokey=1 "$movieout" | awk -F\. '{print $1}')
+        #outfileduration=$(/usr/bin/ffprobe -v error -select_streams v:0 -show_entries stream=duration -of default=noprint_wrappers=1:nokey=1 "$movieout" | awk -F\. '{print $1}')
     else
         echo ""$moviein" does not exit -log from mp4 with srt function"
         exit;
@@ -83,7 +83,7 @@ function mp4withsrt {
 function mkvwithsrt {
     if [[ -f "$moviein" ]]; then
         /usr/bin/ffmpeg -y -nostdin -loglevel error -i "$moviein" -f srt -i "$srt_file" -map 0 -c copy -c:s srt -map_metadata 0 -map 1 -c:s:$subtitle_count srt -metadata:s:s:$subtitle_count language="$lang_code" "$movieout";
-        outfileduration=$(/usr/bin/ffprobe -v error -select_streams v:0 -show_entries stream=duration -of default=noprint_wrappers=1:nokey=1 "$movieout" | awk -F\. '{print $1}')
+        #outfileduration=$(/usr/bin/ffprobe -v error -select_streams v:0 -show_entries stream=duration -of default=noprint_wrappers=1:nokey=1 "$movieout" | awk -F\. '{print $1}')
     else
         echo ""$moviein" does not exit -log from mkv with srt function"
         exit;
@@ -92,8 +92,21 @@ function mkvwithsrt {
 
 #copy out file to original location, delete temp files.
 function removebakfile {
+        # Calculate file sizes
+        original_size=$(stat -c%s "$moviein")
+        new_size=$(stat -c%s "$movieout")
+
+        # Check if the file sizes are within a specified range (e.g., 5MB)
+        size_difference=$((new_size - original_size))
+        size_threshold=5000000  # 5MB
+
+        
+
     if [[ -f "$movieout" ]]; then
-        if [[ "$infileduration" = "$outfileduration" ]]; then
+        if [ $size_difference -le $size_threshold ] && [ $size_difference -ge -$size_threshold ]; then
+
+    #if [[ -f "$movieout" ]]; then
+        #if [[ "$infileduration" = "$outfileduration" ]]; then
             /usr/bin/cp "$movieout" "$moviefullpath";
             /usr/bin/rm "$moviein";
             /usr/bin/rm "$movieout";
