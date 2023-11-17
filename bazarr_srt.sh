@@ -4,7 +4,7 @@
 #define path, filenames, language of srt.
 
 #then add post processing command to bazarr
-# /config/mergesrt.sh "{{directory}}" "{{episode}}" "{{episode_name}}" "{{subtitles_language_code3}}" "{{subtitles}}" 2>&1
+# /config/bazarr_srt.sh "{{episode}}" "{{episode_name}}" "{{subtitles_language_code3}}" "{{subtitles}}" 2>&1
 
 [ $# -lt 4 ] && echo "Usage: bazarr_srt.sh  \"{{episode}}\" \"{{episode_name}}\" \"{{subtitles_language_code3}}\" \"{{subtitles}}\" 2>&1" && exit 1
 
